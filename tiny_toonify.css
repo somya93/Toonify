@@ -1,0 +1,46 @@
+/*
+
+    Introduction to Cloud Computing
+    Summer 2021
+    Carnegie Mellon University
+    
+    File: tiny_toonify.css
+    
+    Program: tiny_toonify
+    
+    This is the layout format for Tiny Toonify website.
+    
+    By Mike Chiang (MC)
+    
+    Change History:
+    
+    VER  DATE        BY  DESCRIPTION
+    ===  ====        ==  ===========
+    1.0  05/30/2021  MC  Forked from Mike's 2020 project
+
+*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 0 auto;
+	padding: 0 2em 1em;
+    width: 700px;
+    border: 3px solid lightblue;
+}
+h1 {
+    text-align: center;
+	color: blue;
+	margin-bottom: .25em;
+}
+p {
+    text-align: center;
+	color: gray;
+	font-size: 14px;
+	font-style: italic;
+}
+img {
+    height: 256px;
+    border: 3px solid gray;
+}
+
