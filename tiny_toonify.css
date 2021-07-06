@@ -11,6 +11,7 @@
     This is the layout format for Tiny Toonify website.
     
     By Mike Chiang (MC)
+    Modified by Somya Mittal
     
     Change History:
     
@@ -22,25 +23,110 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
-    margin: 0 auto;
-	padding: 0 2em 1em;
-    width: 700px;
-    border: 3px solid lightblue;
+    background-color: #b5dce6;
 }
-h1 {
-    text-align: center;
-	color: blue;
-	margin-bottom: .25em;
+
+#header-nav {
+    background-color: #dadfb2;
 }
-p {
+
+#logo-img {
+    width: 50px;
+    height: 50px;
+    margin: 10px 15px 10px 0;
+}
+
+.navbar-brand {
+    padding-top: 25px;
+    margin-bottom: 20px;
+}
+
+.navbar-brand p {
+    font-family: 'Lora', serif;
+    color: #557c3e;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #222;
+    line-height: .75;
+}
+
+.navbar-brand a:hover, .navbar-brand a:focus {
+    text-decoration: none;
+}
+
+.container .jumbotron {
+    margin-top: 30px;
+    box-shadow: 0 0 50px #1c434d;
+    border: 2px solid #3F0C1F;
+}
+
+
+form{
+    margin-top: 50px;
+}
+
+form > h1 {
+    font-size: 3em;
+}
+
+form > label {
+    font-size: 1.2em;
+}
+
+form > p {
     text-align: center;
 	color: gray;
 	font-size: 14px;
 	font-style: italic;
 }
-img {
-    height: 256px;
-    border: 3px solid gray;
+
+.container .btn-primary{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    margin: 5px;
 }
 
+#result-display > img {
+    height: 512px;
+    box-shadow: 0 0 50px #1c434d;
+    border: 2px solid #3F0C1F;
+    margin: 20px;
+}
+
+#result-display {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.panel-footer {
+  margin-top: 30px;
+  padding-top: 35px;
+  padding-bottom: 30px;
+  background-color: #222;
+  border-top: 0;
+  color: white;
+}
+
+.panel-footer div.row {
+  margin-bottom: 35px;
+}
+
+#contact-me, #RealToonify {
+  line-height: 2;
+}
+
+#contact-me > span, #RealToonify > span {
+  font-size: 1.3em;
+}
+
+#RealToonify p {
+  color: #557c3e;
+  font-size: .8em;
+  line-height: 1.8;
+}
+
+#testimonials {
+  font-style: italic;
+}

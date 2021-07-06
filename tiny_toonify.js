@@ -44,94 +44,30 @@ var processPhotoURL = function() {
         // display the original image
         var img = document.createElement('img');
         img.src = photoURL;            
-        document.body.appendChild(img);
-
-        const endpoint = "https://09f9lidrb1.execute-api.us-east-1.amazonaws.com/stage"
-        const success_msg = `
-        <div align="center">
-          Your image has been submitted successfully. 
-          Admire it in all its glory here 
-        </div>
-        `
-
-        // NOTE: replace with your personal DeepAI api-key here 
-        // deepai.setApiKey('577d6aaa-276b-4844-87af-6f009ebd49e8');
-
-        // call the Toonify API via DeepAI and wait for the response in 
-        // an async func because Toonify takes several seconds to complete
+        img.id = "original-image"
+        document.getElementById("result-display").appendChild(img);
         
-//         let payload = `{
-//             "image_uri": photoURL
-//         }`
+        // calling the AWS API Gateway endpoint which will trigger the lambda function to call the Toonify API
+        fetch("https://09f9lidrb1.execute-api.us-east-1.amazonaws.com/stage", {
+            method: 'POST',
+            body: JSON.stringify({
+                "image_uri":photoURL
+            }),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            console.log(data)
+            var toonImg = document.createElement('img');            
+            toonImg.src = data.output_url;
+            toonImg.id = "toonified-image"
+            document.getElementById("result-display").appendChild(toonImg);
+        })
 
-//         jQuery.ajax({
-//             type: 'POST',
-//             url: endpoint,
-//             data: payload,
-//             headers:{
-//                 "Content-Type":"application/json",
-//                 "Access-Control-Allow-Origin":"*"
-//             }
-//             dataType: 'json',
-//             success: function(responseData, textStatus, jqXHR) {
-//                 let value = responseData.body.result;
-//                 var toonImg = document.createElement('img');            
-//                 toonImg.src = value.output_url;
-//                 document.body.appendChild(toonImg);
-//                 // document.write(success_msg)
-//                 // document.write(`<img src="${img}"/>`);
-//             },
-//             error: function (responseData, textStatus, errorThrown) {
-//               alert('POST failed.')
-//             }
-//         })
-
-//         // document.write(success_msg)
-//         // document.write(`<img src="${img}"/>`);
-//     }
-// }
-            fetch("https://09f9lidrb1.execute-api.us-east-1.amazonaws.com/stage", {
-                method: 'POST',
-                body: JSON.stringify({
-                    "image_uri":photoURL
-                }),
-                headers: {
-                    "Content-Type":"application/json"
-                }
-            })
-            .then(function(response){
-                return response.json()
-            })
-            .then(function(data){
-                console.log(data)
-                var toonImg = document.createElement('img');            
-                toonImg.src = data.output_url;
-                document.body.appendChild(toonImg);
-            })
-
-            // const Http = new XMLHttpRequest();
-            // const url = "https://09f9lidrb1.execute-api.us-east-1.amazonaws.com/stage";
-            // var data = "{\"image_uri\" : \"" + photoURL + "\"}"
-            // Http.open("POST", url, true);
-            // Http.setRequestHeader('Content-type', 'application/json');
-
-            // resp = await Http.send(data);
-            // console.log(resp);
-            // var resp = await deepai.callStandardApi("toonify", {
-            //         image: photoURL,
-            //         // add other API parameters here
-            // });
-            
-            // display the API response
-            // if (resp) {
-            //     console.log(resp);
-            //     toonPhotoURL = resp.output_url; // URL of the toonified image
-            
-            //     // display the toonified image
-            //     var toonImg = document.createElement('img');            
-            //     toonImg.src = toonPhotoURL;
-            //     document.body.appendChild(toonImg);
-                
             //     // save both the original & toonified images to S3
             //     savePhotoToS3(photoURL, toonPhotoURL);
             // }
@@ -178,5 +114,5 @@ window.onload = function() {
     $("toonify").onclick = processPhotoURL;
     $("clear").onclick = clearEntries;
 	// $("photoURL").ondblclick = clearEntries; // double click to clear
-    $("photoURL").focus();
+    // $("photoURL").focus();
 };
